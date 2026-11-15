@@ -24,3 +24,6 @@ dist/
 build/
 coverage/
 *.log
+
+# Upstream source checkouts for local reference
+.references/
