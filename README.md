@@ -4,7 +4,23 @@
 
 核心架构参考 OpenHands，教学组织借鉴极客兔兔的「7 天从零实现」系列：从小例子出发，逐章解释设计、实现关键路径、验证可观察的行为。
 
-**当前状态：规划已更新，程序尚未实现。** 当前按两个阶段建设本地 Coding Agent，范围以 OpenSpec 中的任务、设计和能力规格为准。`docs/tutorial/` 保留早期 SDK 教程草稿，发生冲突时以当前规划为准；文中的目标目录、安装命令和示例 API 不代表已经发布的软件。
+**当前状态：第一阶段开发中，已完成离线终端输入与基本命令。** 当前按两个阶段建设本地 Coding Agent，范围以 OpenSpec 中的任务、设计和能力规格为准。`docs/tutorial/` 保留早期 SDK 教程草稿，发生冲突时以当前规划为准；文中的目标目录、安装命令和示例 API 不代表已经发布的软件。
+
+## 本地运行
+
+第一单元需要 Python 3.11 或更新版本，无需密钥或网络：
+
+```bash
+python3 main.py
+```
+
+输入普通文字回显；`/help` 查看帮助，`/exit` 或 Ctrl+D 退出，Ctrl+C 取消当前输入。
+
+```bash
+python3 -m unittest discover -s tests -p test_repl.py -v
+```
+
+当前按 [实施和验收安排](docs/implementation-plan.md) 推进，模型接入使用 DeepSeek，容器使用 Docker。
 
 ## 从这里开始
 
