@@ -4,20 +4,25 @@
 
 核心架构参考 OpenHands，教学组织借鉴极客兔兔的「7 天从零实现」系列：从小例子出发，逐章解释设计、实现关键路径、验证可观察的行为。
 
-**当前状态：第一阶段开发中，已完成离线终端输入与基本命令。** 当前按两个阶段建设本地 Coding Agent，范围以 OpenSpec 中的任务、设计和能力规格为准。`docs/tutorial/` 保留早期 SDK 教程草稿，发生冲突时以当前规划为准；文中的目标目录、安装命令和示例 API 不代表已经发布的软件。
+**当前状态：第一阶段开发中，已接通 DeepSeek 配置、多轮对话与错误处理；真实模型验收等待本机配置。** 当前按两个阶段建设本地 Coding Agent，范围以 OpenSpec 中的任务、设计和能力规格为准。`docs/tutorial/` 保留早期 SDK 教程草稿，发生冲突时以当前规划为准；文中的目标目录、安装命令和示例 API 不代表已经发布的软件。
 
 ## 本地运行
 
-第一单元需要 Python 3.11 或更新版本，无需密钥或网络：
+需要 Python 3.11 或更新版本：
 
 ```bash
-python3 main.py
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+python3 scripts/configure_deepseek.py
+.venv/bin/python main.py
 ```
 
-输入普通文字回显；`/help` 查看帮助，`/exit` 或 Ctrl+D 退出，Ctrl+C 取消当前输入。
+配置脚本在本机隐藏输入密钥，保存到仓库外的私有目录，详见 [DeepSeek 配置说明](docs/deepseek-setup.md)。缺少配置仍可使用 `/help` 和 `/exit`。普通输入发送给模型；Enter 提交，Ctrl+C 取消输入或请求，Ctrl+D 退出。当前对话保存在内存，重启不会保留；请求失败不会自动重试，下一次输入仍带有已有历史。
+
+第一单元的离线回显示例保留在 `examples/day01/main.py`，不需要依赖、密钥或网络。
 
 ```bash
-python3 -m unittest discover -s tests -p test_repl.py -v
+.venv/bin/python -m unittest discover -s tests -v
 ```
 
 当前按 [实施和验收安排](docs/implementation-plan.md) 推进，模型接入使用 DeepSeek，容器使用 Docker。
